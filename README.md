@@ -3,27 +3,59 @@ Algorithm for finding the optimal path of a vehicle given a minimum turning radi
 
 ## What it does
 ### main\.py:
+
 Gets drone and waypoint positions and headings through HTTP and returns the path as an array of discretized points through a POST request.
 
-Sample (truncated) return data:
+Sample (truncated) request and response:
 
+### REQUEST
+```
+ {
+    "current_waypoint": {
+        "id": -1,
+        "name": "",
+        "latitude": 38.31513977050781,
+        "longitude": -76.54875183105469,
+        "altitude": 14.09999942779541
+    },
+    "desired_waypoint": {
+        "id": -1,
+        "name": "",
+        "latitude": 38.315139532524324,
+        "longitude": -76.54875183154353,
+        "altitude": 14.09999942779541
+    },
+    "current_heading": 4.0,
+    "desired_heading": 6.0
+ }
+```
+
+### RESPONSE
 ```
 {
     "waypoints": [
         {
             "id": -1,
             "name": "",
-            "lat": 38.31724554506665,
-            "long": -76.55609318023016,
-            "alt": 100.0
+            "latitude": 38.3151397705078,
+            "longitude": -76.54875183105469,
+            "altitude": 14.09999942779541
         },
         {
             "id": -1,
             "name": "",
-            "lat": 38.31726671913608,
-            "long": -76.55609202583662,
-            "alt": 100.0
-        }, ...
+            "latitude": 38.31514080633723,
+            "longitude": -76.54874300740228,
+            "altitude": 14.09999942779541
+        },
+        {
+            "id": -1,
+            "name": "",
+            "latitude": 38.31514061883008,
+            "longitude": -76.54874400164033,
+            "altitude": 14.09999942779541
+        },
+        ...
     ]
 }
 ```
@@ -82,9 +114,9 @@ Randomly generates a theoretical drone/waypoint position/orientation and calcula
 </div>
 
 ## How to run
-### main\.py
-1. Install fastapi and pydantic with `pip install fastapi pydantic`
-2. Launch the web server with `uvicorn main:app --reload`
+1. With poetry installed, run `poetry install`
+2. Run `poetry run uvicorn main:app --reload --port 7010`
+
 
 ### dubins_graph\.py
 1. Install matplotlib with `pip install matplotlib`

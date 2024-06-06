@@ -8,9 +8,9 @@ app = FastAPI()
 class Waypoint(BaseModel):
     id: int
     name: str
-    lat: float
-    long: float
-    alt: float
+    latitude: float
+    longitude: float
+    altitude: float
 
 # object received from GCOM
 class Item(BaseModel):
@@ -24,9 +24,9 @@ def create_item(lat, long, alt):
     return {
         "id": -1,
         "name": "",
-        "lat": lat,
-        "long": long,
-        "alt": alt
+        "latitude": lat,
+        "longitude": long,
+        "altitude": alt
     }
 
 @app.post("/")
@@ -34,15 +34,15 @@ async def root(item: Item):
     # get drone and waypoint positions
     drone = item.current_waypoint
     destination = item.desired_waypoint
-    alt = drone.alt
+    alt = drone.altitude
     waypoints = []
 
-    drone_lat = drone.lat
-    drone_long = drone. long
+    drone_lat = drone.latitude
+    drone_long = drone.longitude
     drone_angle = item.current_heading
 
-    point_lat = destination.lat
-    point_long = destination.long
+    point_lat = destination.latitude
+    point_long = destination.longitude
     point_angle = item.desired_heading
 
     # grab points of Dubins path
