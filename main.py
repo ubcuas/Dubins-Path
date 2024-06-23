@@ -20,18 +20,19 @@ class Item(BaseModel):
     desired_heading: float
 
 # converts calculated latitude/longitude into JSON format to match object
-def create_item(lat, long, alt):
+def create_item(lat, long, alt, count):
     return {
-        "id": -1,
-        "name": "",
-        "latitude": lat,
-        "longitude": long,
-        "altitude": alt
+        "id": str(count),
+        "name": "wp" + str(count),
+        "latitude": str(lat),
+        "longitude": str(long),
+        "altitude": str(alt),
     }
 
 @app.post("/")
 async def root(item: Item):
     # get drone and waypoint positions
+    print(item)
     drone = item.current_waypoint
     destination = item.desired_waypoint
     alt = drone.altitude
@@ -49,7 +50,9 @@ async def root(item: Item):
     points = dubin(drone_lat, drone_long, drone_angle, point_lat, point_long, point_angle)
 
     # turn all points into JSON objects
+    count = 1
     for p in points:
-        waypoints.append(create_item(p[0], p[1], alt))
-
-    return {"waypoints": waypoints}
+        waypoints.append(create_item(p[0], p[1], alt, count))
+        count += 1
+    print(waypoints, flush=True)
+    return waypoints

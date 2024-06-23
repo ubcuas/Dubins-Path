@@ -4,7 +4,7 @@ from gps_utils import GPS_utils
 
 INCREMENTS          =   8
 PI                  =   math.pi
-TURNRADIUS          =   5
+TURNRADIUS          =   400
 
 # iterates through and finds the shortest (optimal) route
 def find_best(paths):

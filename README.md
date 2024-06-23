@@ -115,7 +115,7 @@ Randomly generates a theoretical drone/waypoint position/orientation and calcula
 
 ## How to run
 1. With poetry installed, run `poetry install`
-2. Run `poetry run uvicorn main:app --reload --port 7010`
+2. Run `uvicorn main:app --reload --port 7010`
 
 
 ### dubins_graph\.py
