@@ -2,9 +2,9 @@ import math
 from dubins_utils import RLR, LRL, RSL, LSR, RSR, LSL
 from gps_utils import GPS_utils
 
-INCREMENTS          =   8
+INCREMENTS          =   4
 PI                  =   math.pi
-TURNRADIUS          =   400
+TURNRADIUS          =   5
 
 # iterates through and finds the shortest (optimal) route
 def find_best(paths):
